@@ -54,11 +54,11 @@ class Kohana_Hooks
 	{
 		if (isset(Kohana_Hooks::$_events[$event]))
 		{
-			return sizeof(Kohana_Hooks::$_events[$event]);
+			Kohana_Hooks::$_events[$event];
 		}
 		else
 		{
-			return 0;
+			return array();
 		}
 	}
 }

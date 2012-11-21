@@ -15,9 +15,11 @@ The registered method can expect one or more parameters. The parameters will be 
 
 ## Get Registered Actions
 
-To get the number of registered actions on a given hook.
+To get an array of all registered methods on a specific hook:
 
-	Hooks::registered($hook);
+	$array = Hooks::registered($hook);
+	
+The array is empty if no method is registered on the hook.
 
 ## Fire Hooks
 
