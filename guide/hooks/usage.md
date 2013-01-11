@@ -9,9 +9,9 @@ Let first make some general definitions. For this module a hook will be a simple
 
 To register an action on a specific hook:
 
-	Hooks::register($hook, $method);
+	Hooks::register($hook, $method, $args);
 	
-The registered method can expect one or more parameters. The parameters will be passed if the hook is fired.
+The registered method can expect one or more parameters. The parameters will be passed if the hook is fired merged with the in $args given paramters.
 
 ## Get Registered Actions
 
