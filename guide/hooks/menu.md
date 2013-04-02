@@ -1,2 +1,2 @@
-## [Hooks](index)
+## Hooks
  - [Usage](usage)

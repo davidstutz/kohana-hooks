@@ -54,7 +54,7 @@ class Kohana_Hooks
 	{
 		if (isset(Kohana_Hooks::$_events[$event]))
 		{
-			Kohana_Hooks::$_events[$event];
+			return Kohana_Hooks::$_events[$event];
 		}
 		else
 		{
