@@ -24,14 +24,33 @@ class Kohana_Hooks {
      * @param	string	event
      * @param	array 	args
      */
-    public static function fire($event, $args = array()) {
+    public static function fire($event, array $args = array()) {
         if (isset(Hooks::$_events[$event])) {
             foreach (Hooks::$_events[$event] as $array) {
                 call_user_func_array($array[0], array_merge($array[1], $args));
             }
         }
     }
-
+    
+    /**
+     * Fires a given event and collects the results as array.
+     * 
+     * @param   string  event
+     * @param   array   args
+     * @return  array   results
+     */
+    public static function collect($event, array $args = array()) {
+        $results = array();
+        
+        if (isset(Hooks::$_events[$event])) {
+            foreach (Hooks::$_events[$event] as $array) {
+                $results[] = call_user_func_array($array[0], array_merge($array[1], $args));
+            }
+        }
+        
+        return $results;
+    }
+    
     /**
      * Register an event.
      *

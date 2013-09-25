@@ -10,7 +10,7 @@ For this module a hook will be a simple unique string. Different subsystems of a
 To register an action on a specific hook:
 
 	Hooks::register($hook, $method, $args);
-	
+
 The registered method can expect one or more parameters. The parameters will be passed if the hook is fired merged with the in $args given parameters - the in $args given parameters first.
 
 ## Get Registered Actions
@@ -18,7 +18,7 @@ The registered method can expect one or more parameters. The parameters will be 
 To get an array of all registered methods on a specific hook:
 
 	$array = Hooks::registered($hook);
-	
+
 The array is empty if no method is registered on the hook.
 
 	if (!empty(Hooks::registered($hook)) {
