@@ -19,17 +19,34 @@ class Kohana_Hooks {
     }
 
     /**
+     * 
+     * 
+     * @param   string  event
+     * @param   array   args
+     * @return  array   results
+     */
+   protected static function execute($event, array $args = array())
+   {
+        $results = array();
+        
+        if (isset(self::$_events[$event])) {
+            foreach (self::$_events[$event] as $hook) {
+                $results[] = call_user_func_array($hook[0], array_merge($hook[1], $args));
+            }
+        }
+        
+        return $results;
+    }
+
+    /**
      * Fires an given event.
      *
      * @param	string	event
      * @param	array 	args
+     * @return void
      */
     public static function fire($event, array $args = array()) {
-        if (isset(Hooks::$_events[$event])) {
-            foreach (Hooks::$_events[$event] as $array) {
-                call_user_func_array($array[0], array_merge($array[1], $args));
-            }
-        }
+        self::execute($event, $args);
     }
     
     /**
@@ -40,61 +57,42 @@ class Kohana_Hooks {
      * @return  array   results
      */
     public static function collect($event, array $args = array()) {
-        $results = array();
-        
-        if (isset(Hooks::$_events[$event])) {
-            foreach (Hooks::$_events[$event] as $array) {
-                $results[] = call_user_func_array($array[0], array_merge($array[1], $args));
-            }
-        }
-        
-        return $results;
+        return self::execute($event, $args);
     }
     
     /**
      * Register an event.
      *
-     * @param	mixed		event
-     * @param	string	function
-     * @param	array 		args
+     * @param	mixed		$event
+     * @param	callable	$function
+     * @param	array 		$args
      */
-    public static function register($mixed, $function, $args = array()) {
-        if (is_array($mixed)) {
-            foreach ($mixed as $event) {
-                Hooks::$_events[$event][] = array($function, $args);
+    public static function register($event, $function, array $args = array()) {
+        if (is_array($event)) {
+            foreach ($event as $name) {
+                self::register($name, $function, $args);
             }
-        }
-        else {
-            Hooks::$_events[$mixed][] = array($function, $args);
+        } else {
+            if (!isset(self::$_events[$event])) {
+                self::$_events[$event] = array();
+            }
+            if (!in_array(array($function, $args), self::$_events[$event])) {
+                self::$_events[$event][] = array($function, $args);
+            }
         }
     }
 
     /**
      * Check for registered functions.
      *
-     * @param	mixed	event
-     * @return	int		number of registered functions
+     * @param	mixed	$event
+     * @return	array   number of registered functions
      */
-    public static function registered($mixed) {
+    public static function registered($event) {
         if (is_array($mixed)) {
-            $array = array();
-            
-            foreach ($mixed as $event) {
-                if (isset(Hooks::$_events[$event])) {
-                    array_merge($array, Hooks::$_events[$event]);
-                }
-            }
-            
-            return $array;
+            return array_intersect_key(self::$_events, array_reverse($event));
         }
-        else {
-            if (isset(Hooks::$_events[$mixed])) {
-                return Hooks::$_events[$mixed];
-            }
-            else {
-                return array();
-            }
-        }
+        return isset(self::$_events[$event]) ? self::$_events[$event] : array();
     }
 
 }
