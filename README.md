@@ -4,6 +4,22 @@ An event module for Kohana.
 
 For documentation see the guide/ subfolder or use Kohana's [Userguide](https://github.com/kohana/userguide) module.
 
+## Composer
+
+Installation via composer:
+
+    {
+        "repositories": [
+            {
+                "type": "vcs",
+                "url": "https://github.com/davidstutz/kohana-hooks"
+            }
+        ],
+        "require": {
+            "davidstutz/kohana-hooks": "dev-master"
+        }
+    }
+
 ## License
 
 Copyright (c) 2013 - 2014 David Stutz
