@@ -1,0 +1,25 @@
+{
+    "name": "davidstutz/kohana-hooks",
+    "type": "kohana-module",
+    "description": "Application hooks module for Kohana.",
+    "homepage": "https://davidstutz.de",
+    "license": "BSD-3-Clause",
+    "keywords": ["kohana", "framework", "hooks"],
+    "authors": [
+        {
+            "name": "David Stutz",
+            "email": "davidstutz@web.de",
+            "homepage": "https://davidstutz.de",
+            "role": "developer"
+        }
+    ],
+    "support": {
+        "issues": "http://github.com/davidstutz/kohana-hooks",
+        "source": "http://github.com/davidstutz/kohana-hooks"
+    },
+    "require": {
+        "composer/installers": "~1.0",
+        "php": ">=5.3.3",
+        "kohana/core": ">=3.3"
+    }
+}
